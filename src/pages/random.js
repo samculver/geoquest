@@ -43,7 +43,7 @@ class Random extends React.Component {
             targetLongitude
           )}
         </span>
-        <p>Acuracy: {accuracy}m</p>
+        <p>Accuracy: {accuracy}m</p>
       </Layout>
     )
   }
