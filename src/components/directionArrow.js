@@ -19,17 +19,15 @@ class DirectionArrow extends React.Component {
     } = this.props.coordinates
 
     const latRad = this.toRadians(latitude),
-    lonRad = this.toRadians(longitude),
-    tarLatRad = this.toRadians(targetLatitude),
-    tarLonRad = this.toRadians(targetLongitude)
+      lonRad = this.toRadians(longitude),
+      tarLatRad = this.toRadians(targetLatitude),
+      tarLonRad = this.toRadians(targetLongitude)
 
     const y = Math.sin(tarLonRad - lonRad) * Math.cos(tarLatRad)
     console.log(latRad)
     const x =
       Math.cos(latRad) * Math.sin(tarLatRad) -
-      Math.sin(latRad) *
-        Math.cos(tarLatRad) *
-        Math.cos(tarLonRad - lonRad)
+      Math.sin(latRad) * Math.cos(tarLatRad) * Math.cos(tarLonRad - lonRad)
     const bearing = this.wrap360(this.toDegrees(Math.atan2(y, x)))
 
     const arrowDegrees = bearing - heading - 90
@@ -38,7 +36,7 @@ class DirectionArrow extends React.Component {
       <>
         <svg
           className={styles.arrow}
-          style={{transform: `rotate(${arrowDegrees}deg)`}}
+          style={{ transform: `rotate(${arrowDegrees}deg)` }}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 350 100"
         >
@@ -64,7 +62,11 @@ class DirectionArrow extends React.Component {
             markerEnd="url(#arrowhead)"
           />
         </svg>
-        <p className={styles.stats}>{`Bearing: ${bearing.toFixed([0])}   Heading: ${heading}`}</p>
+        <p className={styles.stats}>
+          <span>{`Bearing: ${bearing.toFixed([0])}`}</span>
+          <span>{`Heading: ${heading}`}</span>
+          <span>{`Accuracy: ${this.props.accuracy}m`}</span>
+        </p>
       </>
     )
   }

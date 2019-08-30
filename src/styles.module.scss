@@ -35,7 +35,7 @@ a:visited {
   .arrow {
     width: 50vw;
     fill: #FFF;
-    margin-bottom:20vw;
+    margin-bottom:26vw;
   }
 
   .stats{
@@ -44,6 +44,11 @@ a:visited {
     left:0;
     width:100%;
     text-align:center;
-    font-size:.8em;
+    font-size:.7em;
+
+    >span{
+      display:inline-block;
+      padding:0 .4em;
+    }
   }
 }
