@@ -18,13 +18,18 @@ class DirectionArrow extends React.Component {
       targetLongitude,
     } = this.props.coordinates
 
-    const y = Math.sin(targetLongitude - longitude) * Math.cos(targetLatitude)
-    console.log(latitude)
+    const latRad = this.toRadians(latitude),
+    lonRad = this.toRadians(longitude),
+    tarLatRad = this.toRadians(targetLatitude),
+    tarLonRad = this.toRadians(targetLongitude)
+
+    const y = Math.sin(tarLonRad - lonRad) * Math.cos(tarLatRad)
+    console.log(latRad)
     const x =
-      Math.cos(latitude) * Math.sin(targetLatitude) -
-      Math.sin(latitude) *
-        Math.cos(targetLatitude) *
-        Math.cos(targetLongitude - longitude)
+      Math.cos(latRad) * Math.sin(tarLatRad) -
+      Math.sin(latRad) *
+        Math.cos(tarLatRad) *
+        Math.cos(tarLonRad - lonRad)
     const bearing = this.wrap360(this.toDegrees(Math.atan2(y, x)))
 
     const arrowDegrees = bearing - heading - 90
@@ -69,7 +74,7 @@ class DirectionArrow extends React.Component {
   }
 
   toRadians = degrees => {
-    return (this * Math.PI) / 180
+    return (degrees * Math.PI) / 180
   }
 
   wrap360 = degrees => {
