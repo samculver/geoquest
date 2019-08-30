@@ -10,7 +10,7 @@ class DirectionArrow extends React.Component {
   }
 
   render() {
-    const { headingDegree } = this.context
+    const { heading } = this.context
     const {
       latitude,
       longitude,
@@ -27,7 +27,7 @@ class DirectionArrow extends React.Component {
         Math.cos(targetLongitude - longitude)
     const bearing = this.wrap360(this.toDegrees(Math.atan2(y, x)))
 
-    const arrowDegrees = bearing - headingDegree - 90
+    const arrowDegrees = bearing - heading - 90
 
     return (
       <>
@@ -59,6 +59,7 @@ class DirectionArrow extends React.Component {
             markerEnd="url(#arrowhead)"
           />
         </svg>
+        <p className={styles.stats}>{`Bearing: ${bearing.toFixed([0])}   Heading: ${heading}`}</p>
       </>
     )
   }

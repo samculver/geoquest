@@ -1,7 +1,7 @@
 import React from "react"
 
 const defaultState = {
-  headingDegree: null,
+  heading: null,
 }
 
 // create our context
@@ -13,7 +13,7 @@ class OrientationProvider extends React.Component {
     super(props)
 
     this.state = {
-      headingDegree:null,
+      heading:null,
     }
   }
 
@@ -37,11 +37,11 @@ class OrientationProvider extends React.Component {
 
   render() {
     const { children } = this.props
-    const { headingDegree } = this.state
+    const { heading } = this.state
     return (
       <OrientationContext.Provider
         value={{
-          headingDegree: headingDegree,
+          heading: heading,
         }}
       >
         {children}
@@ -63,7 +63,7 @@ class OrientationProvider extends React.Component {
     }
 
     this.setState({
-      headingDegree: heading.toFixed([0]),
+      heading: heading.toFixed([0]),
     })
   }
 }
