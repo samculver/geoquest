@@ -7,6 +7,7 @@ import Header from "../components/header"
 const Home = () => (
   <Layout>
     <button onClick={() => navigate("/random/")}>Find a target</button>
+    <p>v 0.0.2</p>
   </Layout>
 )
 
