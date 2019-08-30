@@ -3,6 +3,7 @@ import { navigate } from "gatsby"
 import styles from "../styles.module.scss"
 import Layout from "../components/layout"
 import Header from "../components/header"
+import DirectionArrow from "../components/directionArrow"
 import LocationContext from "../context/locationContext"
 
 class Random extends React.Component {
@@ -43,6 +44,7 @@ class Random extends React.Component {
           )}
         </span>
         <p>Acuracy: {accuracy}m</p>
+        <DirectionArrow/>
       </Layout>
     )
   }
