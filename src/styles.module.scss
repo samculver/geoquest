@@ -1,9 +1,10 @@
 
 html {
-  background-color: white ;
+  background-color: #222 ;
 }
 
 body {
+  color:white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,5 +21,13 @@ a, a:visited{
 }
 
 .app {
-  font-size: 18px;
+  font-size: 6vw;
+  text-align: center;
+  font-family: sans-serif;
+
+  .distance{
+    font-size:4em;
+    margin: -.2em;
+    display: block;
+  }
 }
