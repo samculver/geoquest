@@ -57,7 +57,7 @@ class DirectionArrow extends React.Component {
             y1="50"
             x2="250"
             y2="50"
-            stroke="#FFFFFF"
+            stroke="darkcyan"
             strokeWidth="8"
             markerEnd="url(#arrowhead)"
           />
