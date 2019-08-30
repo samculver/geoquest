@@ -27,7 +27,7 @@ class DirectionArrow extends React.Component {
         Math.cos(targetLongitude - longitude)
     const bearing = this.wrap360(this.toDegrees(Math.atan2(y, x)))
 
-    const arrowDegrees = bearing - headingDegree - 90
+    const arrowDegrees = bearing + headingDegree - 90
 
     return (
       <>
