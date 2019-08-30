@@ -21,7 +21,7 @@ class LocationProvider extends React.Component {
       accuracy: null,
       timestamp: null,
       settings: {
-        enableHighAccuracy: false,
+        enableHighAccuracy: true,
         timeout: Infinity,
         maximumAge: 0,
       },
