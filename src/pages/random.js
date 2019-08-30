@@ -34,7 +34,7 @@ class Random extends React.Component {
     const { latitude, longitude, accuracy } = this.context
     return (
       <Layout>
-        <p>Distance:</p>
+         <DirectionArrow coordinates={{latitude, longitude, targetLatitude, targetLongitude}}/>
         <span className={styles.distance}>
           {this.getDistance(
             latitude,
@@ -44,7 +44,6 @@ class Random extends React.Component {
           )}
         </span>
         <p>Acuracy: {accuracy}m</p>
-        <DirectionArrow/>
       </Layout>
     )
   }

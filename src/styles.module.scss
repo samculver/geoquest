@@ -1,10 +1,9 @@
-
 html {
-  background-color: #222 ;
+  background-color: #222;
 }
 
 body {
-  color:white;
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,10 +11,11 @@ body {
   margin: 0;
 }
 
-a, a:visited{
+a,
+a:visited {
   text-decoration: none;
 
-  &:hover{
+  &:hover {
     text-decoration: underline;
   }
 }
@@ -25,9 +25,15 @@ a, a:visited{
   text-align: center;
   font-family: sans-serif;
 
-  .distance{
-    font-size:4em;
-    margin: -.2em;
+  .distance {
+    font-size: 4em;
+    margin: -0.2em;
     display: block;
+  }
+
+  .arrow {
+    width: 50vw;
+    fill: #FFF;
+    margin-bottom:20vw;
   }
 }
