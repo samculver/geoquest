@@ -93,10 +93,9 @@ a:visited {
   }
 
   .distance {
-    font-size: 6em;
-    margin: -0.2em;
+    font-size: 4em;
     display: block;
-    margin: 18vw 0 25vw;
+    margin: 1em 0 0;
   }
 
   .miniDistance{
@@ -110,16 +109,15 @@ a:visited {
   .arrow {
     fill: darkcyan;
     margin: -25vw;
-    width: 50vw;
-    height: 50vw;
+    width: 60vw;
+    height: 60vw;
   }
 
   .map {
-    position:absolute;
+    position:fixed;
     top:0;
     left:0;
-    height: 100%;
-    width: 100%;
+    width:100%;
     box-sizing: border-box;
     padding: 5em 0 0;
 

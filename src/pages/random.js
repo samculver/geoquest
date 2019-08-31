@@ -6,6 +6,7 @@ import Header from "../components/header"
 import DirectionArrow from "../components/directionArrow"
 import LocationContext from "../context/locationContext"
 
+import Div100vh from "react-div-100vh"
 import GoogleMapReact from "google-map-react"
 import { TiMap, TiCompass, TiTimes, TiUser, TiLocationArrow } from "react-icons/ti"
 import { GiTreasureMap } from "react-icons/gi"
@@ -85,7 +86,7 @@ class Random extends React.Component {
           </div>
         )}
         {showMap && (
-          <div className={styles.map}>
+          <Div100vh className={styles.map}>
             <GoogleMapReact
               bootstrapURLKeys={{
                 key: "AIzaSyD4SADWp_Jb34U61H8mFrBimnutRBGqGLs",
@@ -104,7 +105,7 @@ class Random extends React.Component {
                 targetLongitude
               )}
             </span>
-          </div>
+          </Div100vh>
         )}
       </Layout>
     )
