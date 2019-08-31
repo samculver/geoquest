@@ -1,6 +1,7 @@
 import React from "react"
 import styles from "../styles.module.scss"
 import OrientationContext from "../context/orientationContext"
+import { TiArrowRight, TiLocationArrow } from "react-icons/ti"
 
 class DirectionArrow extends React.Component {
   static contextType = OrientationContext
@@ -34,34 +35,10 @@ class DirectionArrow extends React.Component {
 
     return (
       <>
-        <svg
+        <TiArrowRight
           className={styles.arrow}
           style={{ transform: `rotate(${arrowDegrees}deg)` }}
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 350 100"
-        >
-          <defs>
-            <marker
-              id="arrowhead"
-              markerWidth="10"
-              markerHeight="7"
-              refX="0"
-              refY="3.5"
-              orient="auto"
-            >
-              <polygon points="0 0, 10 3.5, 0 7" />
-            </marker>
-          </defs>
-          <line
-            x1="0"
-            y1="50"
-            x2="250"
-            y2="50"
-            stroke="darkcyan"
-            strokeWidth="8"
-            markerEnd="url(#arrowhead)"
-          />
-        </svg>
+        />
         <p className={styles.stats}>
           <span>{`Bearing: ${bearing.toFixed([0])}`}</span>
           <span>{`Heading: ${heading}`}</span>
