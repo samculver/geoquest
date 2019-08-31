@@ -28,15 +28,20 @@ a:visited {
 
   .button{
     background: #222;
-    color: cyan;
+    color: white;
     padding: .8em 1.1em;
-    border: 1px solid #333;
+    border: 1px solid #1976d2;
     font-size: 1em;
     font-weight: normal;
     text-transform: uppercase;
     border-radius: .4em;
     box-shadow: 0 0.1em 1em rgba(0, 0, 0, 0.4);
     font-family: inherit;
+
+    &:hover{
+      background-color:rgba(25,118,210,.1);
+      cursor:pointer;
+    }
   }
 
   .distance {
@@ -48,7 +53,7 @@ a:visited {
 
   .arrow {
     width: 50vw;
-    fill: darkcyan;
+    fill: #1976d2;
   }
 
   .stats{
