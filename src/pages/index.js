@@ -8,8 +8,8 @@ import { GiTreasureMap } from "react-icons/gi"
 const Home = () => (
   <Layout>
     <GiTreasureMap className={styles.logo} />
-    <p className={styles.gameModeMenu}>
-      <button className={styles.button} onClick={() => navigate("/random/")}>
+    <p className={styles.centerTopAdjust}>
+      <button className={styles.button} onClick={() => navigate("/modes/")}>
         Play
       </button>
     </p>
