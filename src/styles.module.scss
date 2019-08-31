@@ -24,18 +24,19 @@ a:visited {
 .app {
   font-size: 4vw;
   text-align: center;
-  font-family: sans-serif;
+  font-family: "Helvetica", "Arial", sans-serif;
 
   .button{
     background: #222;
-    color: white;
-    padding: .7em 1em;
-    border: none;
-    border: 1px solid darkcyan;
+    color: cyan;
+    padding: .8em 1.1em;
+    border: 1px solid #333;
     font-size: 1em;
     font-weight: normal;
-    border-radius: 4px;
-    box-shadow: 0 2px 10px rgba(0,0,0,.4);
+    text-transform: uppercase;
+    border-radius: .4em;
+    box-shadow: 0 0.1em 1em rgba(0, 0, 0, 0.4);
+    font-family: inherit;
   }
 
   .distance {
