@@ -6,12 +6,24 @@ import Header from "../components/header"
 import DirectionArrow from "../components/directionArrow"
 import LocationContext from "../context/locationContext"
 
+import GoogleMapReact from "google-map-react"
+import { TiMap, TiCompass, TiTimes, TiUser, TiLocationArrow } from "react-icons/ti"
+import { GiTreasureMap } from "react-icons/gi"
+
+const MapMarker = ({ text }) => <div>{text}</div>
+
 class Random extends React.Component {
   static contextType = LocationContext
 
   state = {
     targetLatitude: null,
     targetLongitude: null,
+    mapCenter: {
+      lat: null,
+      lng: null,
+    },
+    mapZoom: 18,
+    showMap: false,
   }
 
   componentDidUpdate() {
@@ -25,29 +37,83 @@ class Random extends React.Component {
       this.setState({
         targetLatitude,
         targetLongitude,
+        mapCenter: {
+          lat: latitude,
+          lng: longitude,
+        },
       })
     }
   }
 
   render() {
-    const { targetLatitude, targetLongitude } = this.state
+    const {
+      targetLatitude,
+      targetLongitude,
+      mapCenter,
+      mapZoom,
+      showMap,
+    } = this.state
     const { latitude, longitude, accuracy } = this.context
     return (
       <Layout>
-        <DirectionArrow
-          coordinates={{ latitude, longitude, targetLatitude, targetLongitude }}
-          accuracy={accuracy}
-        />
-        <span className={styles.distance}>
-          {this.getDistance(
-            latitude,
-            longitude,
-            targetLatitude,
-            targetLongitude
-          )}
-        </span>
+        <div className={styles.commandBar}>
+          <div className={styles.navModes}>
+            <GiTreasureMap className={styles.logoNav}onClick={() => navigate("/")} />
+            <TiCompass className={!showMap ? styles.active : ''} onClick={() => this.toggleMap(false)} />
+            <TiMap className={showMap ? styles.active : ''} onClick={() => this.toggleMap(true)} />
+          </div>
+        </div>
+        {!showMap && (
+          <div>
+            <DirectionArrow
+              coordinates={{
+                latitude,
+                longitude,
+                targetLatitude,
+                targetLongitude,
+              }}
+              accuracy={accuracy}
+            />
+            <span className={styles.distance}>
+              {this.getDistance(
+                latitude,
+                longitude,
+                targetLatitude,
+                targetLongitude
+              )}
+            </span>
+          </div>
+        )}
+        {showMap && (
+          <div className={styles.map}>
+            <GoogleMapReact
+              bootstrapURLKeys={{
+                key: "AIzaSyD4SADWp_Jb34U61H8mFrBimnutRBGqGLs",
+              }}
+              defaultCenter={mapCenter}
+              defaultZoom={mapZoom}
+            >
+              <TiUser className={styles.mapIcon} lat={latitude} lng={longitude} />
+              <TiTimes className={styles.mapIcon} lat={targetLatitude} lng={targetLongitude} />
+            </GoogleMapReact>
+            <span className={styles.miniDistance}>
+              {this.getDistance(
+                latitude,
+                longitude,
+                targetLatitude,
+                targetLongitude
+              )}
+            </span>
+          </div>
+        )}
       </Layout>
     )
+  }
+
+  toggleMap = value => {
+    this.setState({
+      showMap: value != null ? value : !this.state.showMap,
+    })
   }
 
   getRandomNearbyTarget = (original_lat, original_lng) => {
