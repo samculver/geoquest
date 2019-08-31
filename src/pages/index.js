@@ -7,7 +7,7 @@ import Header from "../components/header"
 const Home = () => (
   <Layout>
     <button className={styles.button} onClick={() => navigate("/random/")}>Find a target</button>
-    <p className={styles.stats}>v 0.0.4</p>
+    <p className={styles.stats}>v 0.0.5</p>
   </Layout>
 )
 
