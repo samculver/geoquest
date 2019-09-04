@@ -134,7 +134,7 @@ class Guidance extends React.Component {
     )
     // if we are really close to the target ( in meters ), then set State as arrived, then call parent CallBack function
     // to do: find out why sometimes distance is initially zero
-    if(distance <= 80 && distance !== 0 ){
+    if(distance <= 2 && distance !== 0 ){
       this.setState({ arrived: true })
     }
   }
