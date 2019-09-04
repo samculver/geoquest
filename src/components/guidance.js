@@ -6,12 +6,7 @@ import LocationContext from "../context/locationContext"
 
 import Div100vh from "react-div-100vh"
 import GoogleMapReact from "google-map-react"
-import {
-  TiMap,
-  TiCompass,
-  TiTimes,
-  TiUser
-} from "react-icons/ti"
+import { TiMap, TiCompass, TiTimes, TiUser } from "react-icons/ti"
 import { GiTreasureMap } from "react-icons/gi"
 
 class Guidance extends React.Component {
@@ -19,16 +14,29 @@ class Guidance extends React.Component {
 
   state = {
     mapZoom: 18,
-    showMap: false
+    showMap: false,
+    arrived: false,
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { arrived } = this.state
+    const { onArrive } = this.props;
+    if (!arrived) {
+      this.checkIfArrived()
+    }
+    if(arrived && !prevState.arrived){
+      // trigger callback function when arrived
+      if(onArrive){
+        onArrive()
+      }
+    }
+    this.checkIfNewTarget(prevProps)
   }
 
   render() {
-    const {
-      mapZoom,
-      showMap,
-    } = this.state
+    const { mapZoom, showMap } = this.state
     const { latitude, longitude, accuracy } = this.context
-    const { targetLatitude, targetLongitude } = this.props;
+    const { targetLatitude, targetLongitude } = this.props
     return (
       <>
         <div className={styles.commandBar}>
@@ -63,7 +71,8 @@ class Guidance extends React.Component {
                 latitude,
                 longitude,
                 targetLatitude,
-                targetLongitude
+                targetLongitude,
+                true
               )}
             </span>
           </div>
@@ -76,7 +85,7 @@ class Guidance extends React.Component {
               }}
               defaultCenter={{
                 lat: latitude,
-                lng: longitude
+                lng: longitude,
               }}
               defaultZoom={mapZoom}
             >
@@ -96,7 +105,8 @@ class Guidance extends React.Component {
                 latitude,
                 longitude,
                 targetLatitude,
-                targetLongitude
+                targetLongitude,
+                true
               )}
             </span>
           </Div100vh>
@@ -111,7 +121,42 @@ class Guidance extends React.Component {
     })
   }
 
-  getDistance = (lat1, lon1, lat2, lon2) => {
+  checkIfArrived = () => {
+    // if arrived, then set State arrived = true
+    const { latitude, longitude } = this.context
+    const { targetLatitude, targetLongitude, onArrive } = this.props
+    const distance = this.getDistance(
+      latitude,
+      longitude,
+      targetLatitude,
+      targetLongitude,
+      false
+    )
+    // if we are really close to the target ( in meters ), then set State as arrived, then call parent CallBack function
+    // to do: find out why sometimes distance is initially zero
+    if(distance <= 80 && distance !== 0 ){
+      this.setState({ arrived: true })
+    }
+  }
+
+  checkIfNewTarget = prevProps => {
+    // if targetLatitude and TargetLongitude change, then set Sate 'arrived' = false
+    const { targetLatitude, targetLongitude } = this.props
+    const {
+      targetLatitude: prevTargetLatitude,
+      targetLongitude: prevTargetLongitude,
+    } = prevProps
+    if (
+      targetLatitude !== prevTargetLatitude &&
+      targetLongitude !== prevTargetLongitude
+    ) {
+      this.setState({
+        arrived: false,
+      })
+    }
+  }
+
+  getDistance = (lat1, lon1, lat2, lon2, readable) => {
     const R = 6371 // km
     const dLat = ((lat2 - lat1) * Math.PI) / 180
     const dLon = ((lon2 - lon1) * Math.PI) / 180
@@ -122,9 +167,11 @@ class Guidance extends React.Component {
         Math.sin(dLon / 2) *
         Math.sin(dLon / 2)
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-    const d = R * c
-    if (d > 1) return Math.round(d) + "km"
-    else if (d <= 1) return Math.round(d * 1000) + "m"
+    let d = Math.round(R * c * 1000)
+    if (readable) {
+      if (d >= 1000) return Math.round(d / 1000) + "km"
+      else if (d < 1000) return d + "m"
+    }
     return d
   }
 }

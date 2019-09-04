@@ -29,7 +29,7 @@ class Random extends React.Component {
     } = this.state
     return (
       <Layout>
-        <Guidance targetLatitude={targetLatitude} targetLongitude={targetLongitude} />
+        <Guidance targetLatitude={targetLatitude} targetLongitude={targetLongitude} onArrive={this.onArrive} />
       </Layout>
     )
   }
@@ -48,6 +48,11 @@ class Random extends React.Component {
         targetLongitude
       })
     }
+  }
+
+  onArrive = () => {
+    alert('you have arrived!');
+    // need dialog message and buttons for whats next (new location or exit)
   }
 
   getRandomNearbyTarget = (original_lat, original_lng) => {
