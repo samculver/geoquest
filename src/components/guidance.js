@@ -25,7 +25,7 @@ class Guidance extends React.Component {
       this.checkIfArrived()
     }
     if (arrived && !prevState.arrived) {
-      // trigger callback function when arrived
+      // trigger callback function (what happens next) when arrived
       if (onArrive) {
         onArrive()
       }
