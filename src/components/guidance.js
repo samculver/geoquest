@@ -20,13 +20,13 @@ class Guidance extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { arrived } = this.state
-    const { onArrive } = this.props;
+    const { onArrive } = this.props
     if (!arrived) {
       this.checkIfArrived()
     }
-    if(arrived && !prevState.arrived){
+    if (arrived && !prevState.arrived) {
       // trigger callback function when arrived
-      if(onArrive){
+      if (onArrive) {
         onArrive()
       }
     }
@@ -132,9 +132,8 @@ class Guidance extends React.Component {
       targetLongitude,
       false
     )
-    // if we are really close to the target ( in meters ), then set State as arrived, then call parent CallBack function
-    // to do: find out why sometimes distance is initially zero
-    if(distance <= 2 && distance !== 0 ){
+    // distance is within 2 meters from target
+    if (distance <= 2 && distance > 0) {
       this.setState({ arrived: true })
     }
   }
