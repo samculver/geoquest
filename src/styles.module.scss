@@ -6,7 +6,10 @@ html {
 body {
   color: white;
   margin: 0;
-  overflow:hidden;
+  overflow: hidden;
+  font-size: 4vw;
+  text-align: center;
+  font-family: "Helvetica", "Arial", sans-serif;
 }
 
 a,
@@ -18,55 +21,45 @@ a:visited {
   }
 }
 
-.flexCenter{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+h2 {
+  font-weight: 400;
+  font-size: 1.6em;
+}
+h3 {
+  font-weight: 400;
+  font-size: 1.2em;
+}
+
+.button {
+  background: darkcyan;
+  color: white;
+  padding: 0.8em 1.1em 0.7em;
+  font-size: 1.2em;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 0.4em;
+  border: none;
+  border-bottom: 0.2em solid #045454;
+  font-family: inherit;
+
+  &:disabled {
+    opacity: 0.5;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .app {
-  font-size: 4vw;
-  text-align: center;
-  font-family: "Helvetica", "Arial", sans-serif;
 
-  h2{
-    font-weight: 400;
-    font-size: 1.6em;
-  }
-  h3{
-    font-weight: 400;
-    font-size: 1.2em;
-  }
-
-  .button {
-    background: darkcyan;
-    color: white;
-    padding: 0.8em 1.1em 0.7em;
-    font-size: 1.2em;
-    font-weight: normal;
-    text-transform: uppercase;
-    letter-spacing: .08em;
-    border-radius: 0.4em;
-    border:none;
-    border-bottom: .2em solid #045454;
-    font-family: inherit;
-
-    &:disabled{
-      opacity:0.5;
-    }
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  .logo{
+  .logo {
     font-size: 10em;
   }
 
-  .centerTopAdjust{
-    margin-bottom:5em;
+  .centerTopAdjust {
+    margin-bottom: 5em;
   }
 
   .commandBar {
@@ -76,8 +69,8 @@ a:visited {
     z-index: 1;
     width: 100%;
 
-    .logoNav{
-      margin-right:.1em;
+    .logoNav {
+      margin-right: 0.1em;
     }
 
     .navModes {
@@ -86,8 +79,8 @@ a:visited {
       text-align: left;
       color: teal;
 
-      .active{
-        color:white;
+      .active {
+        color: white;
       }
     }
   }
@@ -98,12 +91,12 @@ a:visited {
     margin: 1em 0 0;
   }
 
-  .miniDistance{
-    position:fixed;
-    top:0;
-    right:0;
+  .miniDistance {
+    position: fixed;
+    top: 0;
+    right: 0;
     font-size: 2em;
-    padding: .6em;
+    padding: 0.6em;
   }
 
   .arrow {
@@ -114,17 +107,17 @@ a:visited {
   }
 
   .map {
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     box-sizing: border-box;
     padding: 5em 0 0;
 
-    .mapIcon{
-      color:black;
-      width:40px;
-      height:40px;
+    .mapIcon {
+      color: black;
+      width: 40px;
+      height: 40px;
     }
   }
 
@@ -141,4 +134,33 @@ a:visited {
       padding: 0 0.4em;
     }
   }
+}
+
+.flexCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Modal */
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 64px 32px;
+  z-index:1;
+}
+
+.modal {
+  display: inline-block;
+  background-color: white;
+  padding: 2em;
+  color: black;
+  border-radius: 15px;
 }
