@@ -35,8 +35,9 @@ class Random extends React.Component {
         <Modal id="arrived">
           {closeModal => (
             <>
-              <h2>Congrats!</h2>
-              <h3>You have arrived.</h3>
+              <h2>You did it!</h2>
+              <h3>Well done traveler, you have arrived :)</h3>
+              <h3>Would you like to play again?</h3>
               <p>
                 <button
                   className={styles.button}
@@ -46,10 +47,8 @@ class Random extends React.Component {
                     closeModal()
                   }}
                 >
-                  Next Location
+                  Yes
                 </button>
-              </p>
-              <p>
                 <button
                   className={styles.button}
                   onClick={() => {
@@ -57,7 +56,7 @@ class Random extends React.Component {
                     navigate("/")
                   }}
                 >
-                  Exit
+                  No
                 </button>
               </p>
             </>
