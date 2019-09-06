@@ -15,12 +15,12 @@ class Random extends React.Component {
   }
 
   componentDidMount() {
-    this.ifLocationReadySetTarget()
+    this.findTarget()
   }
 
   componentDidUpdate() {
-    // not sure if this is needed; would this trigger if context is sending data later?
-    this.ifLocationReadySetTarget()
+    // not sure if this is needed; only would need if location context data arrives late.
+    this.findTarget()
   }
 
   render() {
@@ -41,7 +41,8 @@ class Random extends React.Component {
                 <button
                   className={styles.button}
                   onClick={() => {
-                    this.setTarget()
+                    const { lat, lng } = this.getRandomNearbyTarget()
+                    this.setTarget(lat, lng)
                     closeModal()
                   }}
                 >
@@ -66,12 +67,22 @@ class Random extends React.Component {
     )
   }
 
-  ifLocationReadySetTarget = () => {
+  findTarget = () => {
     const { latitude, longitude } = this.context
     const { targetLatitude, targetLongitude } = this.state
-    // Get a random coordinate
+
+    // make sure device location is provided and no target is yet set
     if (!targetLatitude && !targetLongitude && latitude && longitude) {
-      this.setTarget()
+      // check if target has been saved in local storage
+      const cachedTarget = localStorage.getItem('randomTarget')
+      if (cachedTarget) {
+        const { lat, lng } = JSON.parse(cachedTarget)
+        this.setTarget(lat, lng)
+      } else {
+        // set random target if none exists from cache
+        const { lat, lng } = this.getRandomNearbyTarget()
+        this.setTarget(lat, lng)
+      }
     }
   }
 
@@ -79,19 +90,16 @@ class Random extends React.Component {
     this.props.openModal("arrived")
   }
 
-  setTarget = () => {
-    const { latitude, longitude } = this.context
-    let { targetLatitude, targetLongitude } = this.getRandomNearbyTarget(
-      latitude,
-      longitude
-    )
+  setTarget = (lat, lng) => {
     this.setState({
-      targetLatitude,
-      targetLongitude,
+      targetLatitude: lat,
+      targetLongitude: lng,
     })
+    localStorage.setItem('randomTarget', JSON.stringify({lat, lng}))
   }
 
-  getRandomNearbyTarget = (original_lat, original_lng) => {
+  getRandomNearbyTarget = () => {
+    const { latitude: original_lat, longitude: original_lng } = this.context
     const r = 100 / 111300, // = 100 meters
       y0 = original_lat,
       x0 = original_lng,
@@ -107,8 +115,8 @@ class Random extends React.Component {
       newX = x0 + x1
 
     return {
-      targetLatitude: newY,
-      targetLongitude: newX,
+      lat: newY,
+      lng: newX,
     }
   }
 }
