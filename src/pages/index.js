@@ -7,7 +7,7 @@ import { GiTreasureMap } from "react-icons/gi"
 
 const Home = () => {
   // reset any game data
-  localStorage.clear()
+  typeof window !== 'undefined' && window.localStorage.clear()
 
   return (
     <Layout>

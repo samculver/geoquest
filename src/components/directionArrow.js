@@ -25,7 +25,6 @@ class DirectionArrow extends React.Component {
       tarLonRad = this.toRadians(targetLongitude)
 
     const y = Math.sin(tarLonRad - lonRad) * Math.cos(tarLatRad)
-    console.log(latRad)
     const x =
       Math.cos(latRad) * Math.sin(tarLatRad) -
       Math.sin(latRad) * Math.cos(tarLatRad) * Math.cos(tarLonRad - lonRad)
