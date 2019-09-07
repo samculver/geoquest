@@ -32,10 +32,10 @@ class TimeTrial extends React.Component {
         />
         <div className={styles.bottomDrawer}>
           <div className={styles.drawerAlwaysVisible}>
-            <span>Score: {captured}</span>{
-              endTime &&
+            <span>Score: {captured}</span>
+            {endTime && (
               <Countdown endTime={endTime} onComplete={this.endGame} />
-            }
+            )}
           </div>
           <div className={styles.drawerInitiallyHidden}>more</div>
         </div>
@@ -50,7 +50,7 @@ class TimeTrial extends React.Component {
                   onClick={() => {
                     const { lat, lng } = this.getRandomNearbyTarget()
                     this.setTarget(lat, lng)
-                    this.startTimer();
+                    this.startTimer()
                     closeModal()
                   }}
                 >
@@ -82,7 +82,7 @@ class TimeTrial extends React.Component {
                     const { lat, lng } = this.getRandomNearbyTarget()
                     this.resetGame()
                     this.setTarget(lat, lng)
-                    this.startTimer();
+                    this.startTimer()
                     closeModal()
                   }}
                 >
@@ -107,15 +107,15 @@ class TimeTrial extends React.Component {
 
   startGame = () => {
     // check cache for in progress game
-    const cachedTarget = localStorage.getItem('randomTarget')
-    const cachedEndTime = localStorage.getItem('endTime')
+    const cachedTarget = localStorage.getItem("randomTarget")
+    const cachedEndTime = localStorage.getItem("endTime")
     if (cachedTarget && cachedEndTime) {
       const { lat, lng } = JSON.parse(cachedTarget)
       this.setTarget(lat, lng)
       this.setState({
-        endTime: parseInt(cachedEndTime)
+        endTime: parseInt(cachedEndTime),
       })
-      console.log(this.state);
+      console.log(this.state)
     } else {
       // start new game
       this.props.openModal("start")
@@ -125,21 +125,23 @@ class TimeTrial extends React.Component {
   endGame = () => {
     localStorage.clear()
     this.setState({
-      endTime:null
+      endTime: null,
     })
     this.props.openModal("end")
   }
 
-  resetGame = () =>{
+  resetGame = () => {
     this.setState({
-      captured: 0
+      captured: 0,
     })
   }
 
   onArrive = () => {
     this.setState({
-      captured: this.state.captured+1
+      captured: this.state.captured + 1,
     })
+    const { lat, lng } = this.getRandomNearbyTarget()
+    this.setTarget(lat, lng)
   }
 
   setTarget = (lat, lng) => {
@@ -147,15 +149,15 @@ class TimeTrial extends React.Component {
       targetLatitude: lat,
       targetLongitude: lng,
     })
-    localStorage.setItem('randomTarget', JSON.stringify({lat, lng}))
+    localStorage.setItem("randomTarget", JSON.stringify({ lat, lng }))
   }
 
   startTimer = () => {
     const newEndTime = Date.now() + 5 * 60 * 1000 // 5 minute
     this.setState({
-      endTime: newEndTime
+      endTime: newEndTime,
     })
-    localStorage.setItem('endTime', newEndTime)
+    localStorage.setItem("endTime", newEndTime)
   }
 
   getRandomNearbyTarget = () => {
