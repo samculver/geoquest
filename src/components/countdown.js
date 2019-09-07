@@ -8,6 +8,7 @@ const Countdown = (props) => {
   const { endTime, onComplete } = props
   const renderer = ({ hours, minutes, seconds, completed }) => {
     minutes = minutes += hours * 60
+    seconds = ('0' + seconds).slice(-2)
     return (
       <span>
         {minutes}:{seconds}

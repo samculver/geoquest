@@ -2,9 +2,10 @@ html {
   background-color: #222;
 }
 
-html,body{
+html,
+body {
   height: 100vh;
-  overflow:hidden;
+  overflow: hidden;
 }
 
 body {
@@ -38,7 +39,7 @@ h3 {
   background: darkcyan;
   color: white;
   padding: 0.8em 1.1em 0.7em;
-  margin:0 .5em;
+  margin: 0 0.5em;
   font-size: 1.2em;
   font-weight: normal;
   text-transform: uppercase;
@@ -58,7 +59,6 @@ h3 {
 }
 
 .app {
-
   .logo {
     font-size: 10em;
   }
@@ -140,15 +140,36 @@ h3 {
     }
   }
 
-  .bottomDrawer{
+  .bottomDrawer {
     position: fixed;
-    bottom: 0;
+    top: 100%;
     left: 0;
-    width:100%;
-    height:60px;
+    width: 100%;
     z-index: 2;
-    background:#333;
+    background: #333;
     box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+    margin-top: -60px;
+
+    &.open {
+      top: -260px;
+    }
+
+    .drawerAlwaysVisible {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      font-size: 1.4em;
+
+      > * {
+        flex: 1;
+      }
+    }
+
+    .drawerInitiallyHidden {
+      height: 200px;
+      box-sizing: border-box;
+      border-top: 2px solid #222;
+    }
   }
 }
 
@@ -170,7 +191,7 @@ h3 {
   text-align: center;
   background-color: rgba(0, 0, 0, 0.6);
   padding: 64px 32px;
-  z-index:1;
+  z-index: 1;
 }
 
 .modal {
