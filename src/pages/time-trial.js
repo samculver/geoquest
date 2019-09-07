@@ -23,7 +23,7 @@ class TimeTrial extends React.Component {
           targetLatitude={targetLatitude}
           targetLongitude={targetLongitude}
         />
-        <div className={styles.progress}>
+        <div className={styles.bottomDrawer}>
           <Countdown endTime={endTime} onComplete={this.onTimerEnd} />
         </div>
       </Layout>
