@@ -17,7 +17,7 @@ const Home = () => {
           Play
         </button>
       </p>
-      <p className={styles.stats}>v 0.0.15</p>
+      <p className={styles.stats}>v 0.0.16</p>
     </Layout>
   )
 }
