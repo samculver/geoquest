@@ -162,7 +162,7 @@ class TimeTrial extends React.Component {
 
   getRandomNearbyTarget = () => {
     const { latitude: original_lat, longitude: original_lng } = this.context
-    const r = 100 / 111300, // = 100 meters
+    const r = 40 / 111300, // = 40 meters
       y0 = original_lat,
       x0 = original_lng,
       u = Math.random(),
