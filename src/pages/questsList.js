@@ -3,7 +3,7 @@ import { navigate } from "gatsby"
 import styles from "../styles.module.scss"
 import Layout from "../components/layout"
 
-const QuestList = () => {
+const QuestsList = () => {
 
   return (
     <Layout>
@@ -12,4 +12,4 @@ const QuestList = () => {
   )
 }
 
-export default QuestList
+export default QuestsList
