@@ -12,7 +12,7 @@ const Quests = () => {
         <p>
           <button
             className={styles.button}
-            onClick={() => navigate("/questList/")}
+            onClick={() => navigate("/questsList/")}
           >
             Find
           </button>
