@@ -8,6 +8,7 @@ const Quests = () => {
   return (
     <Layout>
       <div className={styles.centerTopAdjust}>
+        <h2>Quests</h2>
         <p>
           <button
             className={styles.button}
