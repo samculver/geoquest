@@ -31,9 +31,8 @@ const Modes = () => {
         </p>
         <p>
           <button
-            disabled
             className={styles.button}
-            onClick={() => navigate("/random/")}
+            onClick={() => navigate("/quests/")}
           >
             Quest
           </button>
