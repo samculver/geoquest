@@ -15,6 +15,13 @@ module.exports = {
         id: "portal",
       },
     },
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: `wfuqmhbc9mh8`,
+        accessToken: `q6uRvjIkXc5hnqsW2qasEVJeFio8cOxdxIB0c4NJg0A`,
+      },
+    }
   ],
   pathPrefix: "/location-game",
 }

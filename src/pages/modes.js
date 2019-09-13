@@ -12,7 +12,7 @@ const Modes = () => {
   return (
     <Layout>
       <div className={styles.centerTopAdjust}>
-        <h3>Mode</h3>
+        <h2>Mode</h2>
         <p>
           <button
             className={styles.button}
