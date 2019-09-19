@@ -24,7 +24,7 @@ const QuestsList = props => {
   const questEdges = props.data.allContentfulQuest.edges
   return (
     <Layout>
-      <h2>Quests</h2>
+      <h2>Quests in your area</h2>
       {questEdges.length && (
         <ul className={styles.questsList}>
           {questEdges.map((questEdge, key) => {
