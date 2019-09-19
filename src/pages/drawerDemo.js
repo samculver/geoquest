@@ -17,6 +17,11 @@ const DrawerDemo = () => {
     you could use the normal "state" to change the "display" prop on
     the "BottomDrawer" component.
   */
+  // setting the Drawer position when the "peek" are is clicked
+  const togglePeekClick = () => {
+    setDrawerMode(drawerMode == "peek" ? "full" : "peek")
+  }
+
   return (
     <>
       <h2>Drawer component demo</h2>
@@ -30,7 +35,7 @@ const DrawerDemo = () => {
         Hide
       </button>
       <BottomDrawer display={drawerMode}>
-        <BottomDrawerPeek onClick={() => setDrawerMode("full")}>
+        <BottomDrawerPeek onClick={() => togglePeekClick()}>
           This is the drawer "peek" area.
         </BottomDrawerPeek>
         <BottomDrawerFull>
