@@ -18,10 +18,11 @@ const DrawerDemo = () => {
     the "BottomDrawer" component.
   */
   return (
-    <Layout>
-      <div className={styles.centerTopAdjust}>
+    <>
+      <p>
+        <h2>Drawer component demo</h2>
         <button className={styles.button} onClick={() => setDrawerMode("peek")}>
-          Peak
+          Peek
         </button>
         <button className={styles.button} onClick={() => setDrawerMode("full")}>
           Full
@@ -29,11 +30,9 @@ const DrawerDemo = () => {
         <button className={styles.button} onClick={() => setDrawerMode(null)}>
           Hide
         </button>
-      </div>
+      </p>
       <BottomDrawer display={drawerMode}>
-        <BottomDrawerPeek>
-          This is the drawer "peek" area.
-        </BottomDrawerPeek>
+        <BottomDrawerPeek>This is the drawer "peek" area.</BottomDrawerPeek>
         <BottomDrawerFull>
           <p>
             This is the drawer full details. Put whatever you want in here and
@@ -41,7 +40,7 @@ const DrawerDemo = () => {
           </p>
         </BottomDrawerFull>
       </BottomDrawer>
-    </Layout>
+    </>
   )
 }
 
