@@ -25,7 +25,7 @@ const BottomDrawer = props => {
 const BottomDrawerPeek = props => {
 
   return (
-      <div className={styles.drawerPeek}>
+      <div onClick={props.onClick} className={styles.drawerPeek}>
         {props.children}
       </div>
   )

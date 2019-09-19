@@ -19,20 +19,20 @@ const DrawerDemo = () => {
   */
   return (
     <>
-      <p>
-        <h2>Drawer component demo</h2>
-        <button className={styles.button} onClick={() => setDrawerMode("peek")}>
-          Peek
-        </button>
-        <button className={styles.button} onClick={() => setDrawerMode("full")}>
-          Full
-        </button>
-        <button className={styles.button} onClick={() => setDrawerMode(null)}>
-          Hide
-        </button>
-      </p>
+      <h2>Drawer component demo</h2>
+      <button className={styles.button} onClick={() => setDrawerMode("peek")}>
+        Peek
+      </button>
+      <button className={styles.button} onClick={() => setDrawerMode("full")}>
+        Full
+      </button>
+      <button className={styles.button} onClick={() => setDrawerMode(null)}>
+        Hide
+      </button>
       <BottomDrawer display={drawerMode}>
-        <BottomDrawerPeek>This is the drawer "peek" area.</BottomDrawerPeek>
+        <BottomDrawerPeek onClick={() => setDrawerMode("full")}>
+          This is the drawer "peek" area.
+        </BottomDrawerPeek>
         <BottomDrawerFull>
           <p>
             This is the drawer full details. Put whatever you want in here and
