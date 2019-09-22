@@ -1,5 +1,6 @@
 import React, { useContext } from "react"
 import { navigate } from "gatsby"
+import * as queryString from 'query-string';
 import * as contentful from "contentful"
 import styles from "../styles.module.scss"
 import Layout from "../components/layout"
@@ -14,10 +15,10 @@ class Quest extends React.Component {
   static contextType = LocationContext
 
   state = {
-    questId: "4eNGhH6iDsP1LBtfMY9SjE", // probably get from query string parameter here
+    questId: queryString.parse(this.props.location.search).id, // probably get from query string parameter here
     quest: null,
     phases: [],
-    currentPhase: 0,
+    currentPhase: 1,
     isQuestComplete: false,
     enableGuidance: true,
     enableMap: true,
@@ -28,6 +29,7 @@ class Quest extends React.Component {
 
   componentDidMount() {
     const { questId } = this.state
+    console.log(questId);
     this.getQuestData()
     /*
     if (questId) {
@@ -65,16 +67,7 @@ class Quest extends React.Component {
     return (
       <Layout>
         {loading && <h2>Loading</h2>}
-        {!loading && currentPhase == 0 && quest && (
-          <>
-            <h2>{quest.fields.title}</h2>
-            <p>{quest.fields.description}</p>
-            <button className={styles.button} onClick={this.goToNextPhase}>
-              Start
-            </button>
-          </>
-        )}
-        {!isQuestComplete && currentPhase > 0 && (
+        {!loading && !isQuestComplete && (
           <>
             {enableGuidance && !phase.fields.question && (
               <Guidance
