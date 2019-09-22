@@ -29,14 +29,6 @@ const Modes = () => {
             Time Trial
           </button>
         </p>
-        <p>
-          <button
-            className={styles.button}
-            onClick={() => navigate("/quests/")}
-          >
-            Quest
-          </button>
-        </p>
       </div>
     </Layout>
   )
