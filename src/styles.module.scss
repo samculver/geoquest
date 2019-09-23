@@ -208,10 +208,12 @@ h3 {
 
   .drawerFull {
     height: 300px;
+    font-size:1.2em;
     box-sizing: border-box;
     border-top: 2px solid #222;
     box-sizing: border-box;
     padding: 10px 20px;
+    overflow:auto;
   }
 }
 

@@ -31,24 +31,29 @@ class Quest extends React.Component {
   answerInput = React.createRef()
 
   componentDidMount() {
-    const { questId } = this.state
-    this.getQuestData()
-    /*
+    const { questId, currentPhase } = this.state
+    //this.getQuestData()
+
     if (questId) {
+      // check cache for in-progress quest
       const cachedQuestData = localStorage.getItem("quest" + questId)
+      const cachedPhaseData = localStorage.getItem("phases" + questId)
       const cachedQuestProgress = localStorage.getItem(
         "questProgress" + questId
       )
-      if (!cachedQuestData) {
+      if (cachedQuestData && cachedPhaseData && cachedQuestProgress) {
+        this.setQuestProgressFromCache(
+          cachedQuestData,
+          cachedPhaseData,
+          cachedQuestProgress
+        )
+      } else {
         this.getQuestData()
       }
-      if (cachedQuestProgress) {
-        this.setQuestProgressFromCache(cachedQuestProgress)
-      }
     } else {
-      // invalid quest id
+      // invalid quest id. do nothing for now
     }
-    */
+    this.cacheQuestProgress(currentPhase, false, true)
   }
 
   render() {
@@ -95,7 +100,7 @@ class Quest extends React.Component {
                 {quest.fields.title}
               </BottomDrawerPeek>
               <BottomDrawerFull>
-                <p>Quest description: {quest.fields.description}</p>
+                <p>{quest.fields.description}</p>
                 {currentPhase > 0 && <p>Current phase: {phase.fields.title}</p>}
               </BottomDrawerFull>
             </BottomDrawer>
@@ -150,6 +155,7 @@ class Quest extends React.Component {
       this.setState({
         quest: entry,
       })
+      localStorage.setItem("quest" + questId, JSON.stringify(entry))
       client
         .getEntries({
           "fields.quest.sys.id": questId,
@@ -163,24 +169,47 @@ class Quest extends React.Component {
             phases: entries.items,
             loading: false,
           })
+          localStorage.setItem("phases" + questId, JSON.stringify(entries.items))
         })
     })
   }
 
-  setQuestProgressFromCache = () => {}
+  setQuestProgressFromCache = (questData, phaseData, progressData) => {
+    const progress = JSON.parse(progressData)
+    this.setState({
+      quest: JSON.parse(questData),
+      phases: JSON.parse(phaseData),
+      currentPhase: progress.currentPhase,
+      isQuestComplete: progress.completed,
+      isQuestSuccessful: progress.successful,
+      loading: false,
+    })
+  }
 
   goToNextPhase = () => {
-    const { currentPhase, phases } = this.state
-
+    const { currentPhase, phases, questId } = this.state
     if (currentPhase < phases.length) {
+      const newPhase = currentPhase + 1;
       this.setState({
-        currentPhase: currentPhase + 1,
+        currentPhase: newPhase,
       })
+      this.cacheQuestProgress(newPhase, false, true)
     } else {
       this.setState({
         isQuestComplete: true,
       })
+      this.cacheQuestProgress(currentPhase, true, true)
+    }    
+  }
+
+  cacheQuestProgress = (currentPhase, completed, successful) => {
+    const { questId } = this.state
+    const progress = {
+      'currentPhase':currentPhase,
+      'completed': completed,
+      'successful' : successful
     }
+    localStorage.setItem("questProgress" + questId, JSON.stringify(progress))
   }
 
   onSubmitAnswer = () => {
@@ -201,6 +230,7 @@ class Quest extends React.Component {
         isQuestComplete: true,
         isQuestSuccessful: false,
       })
+      this.cacheQuestProgress(currentPhase, true, false)
     }
   }
 
