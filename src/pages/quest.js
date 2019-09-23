@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import { navigate } from "gatsby"
-import * as queryString from 'query-string';
+import * as queryString from "query-string"
 import * as contentful from "contentful"
 import styles from "../styles.module.scss"
 import Layout from "../components/layout"
@@ -15,11 +15,12 @@ class Quest extends React.Component {
   static contextType = LocationContext
 
   state = {
-    questId: queryString.parse(this.props.location.search).id, // probably get from query string parameter here
+    questId: queryString.parse(this.props.location.search).id,
     quest: null,
     phases: [],
     currentPhase: 1,
     isQuestComplete: false,
+    isQuestSuccessful: true,
     enableGuidance: true,
     enableMap: true,
     enableCompass: true,
@@ -27,9 +28,10 @@ class Quest extends React.Component {
     loading: true,
   }
 
+  answerInput = React.createRef()
+
   componentDidMount() {
     const { questId } = this.state
-    console.log(questId);
     this.getQuestData()
     /*
     if (questId) {
@@ -60,6 +62,7 @@ class Quest extends React.Component {
       drawerMode,
       loading,
       isQuestComplete,
+      isQuestSuccessful,
     } = this.state
 
     const phase = currentPhase > 0 ? phases[currentPhase - 1] : null
@@ -67,19 +70,24 @@ class Quest extends React.Component {
     return (
       <Layout>
         {loading && <h2>Loading</h2>}
-        {!loading && !isQuestComplete && (
+        {!loading && !isQuestComplete && quest && phases.length && (
           <>
-            {enableGuidance && !phase.fields.question && (
+            {phase.fields.type == "Location" && (
               <Guidance
                 targetLatitude={phase.fields.location.lat}
                 targetLongitude={phase.fields.location.lon}
                 onArrive={this.goToNextPhase}
               />
             )}
-            {phase.fields.question && phase.fields.question.length && (
+            {phase.fields.type == "Question" && (
               <>
                 <h3>{phase.fields.question}</h3>
-                <input type="text" />
+                <input type="text" ref={this.answerInput} />
+                <br />
+                <br />
+                <button className={styles.button} onClick={this.onSubmitAnswer}>
+                  Submit
+                </button>
               </>
             )}
             <BottomDrawer display={drawerMode}>
@@ -93,7 +101,38 @@ class Quest extends React.Component {
             </BottomDrawer>
           </>
         )}
-        {isQuestComplete && <h2>Quest is complete!</h2>}
+        {isQuestComplete && isQuestSuccessful && (
+          <>
+            <h2>
+              Mission accomplished.
+              <br />
+              This Quest is complete!
+            </h2>
+            <button
+              className={styles.button}
+              onClick={() => {
+                navigate("/map")
+              }}
+            >
+              Exit
+            </button>
+          </>
+        )}
+        {isQuestComplete && !isQuestSuccessful && (
+          <>
+            <h2>
+              Sorry! You have not completed the Quest. Please Try again :)
+            </h2>
+            <button
+              className={styles.button}
+              onClick={() => {
+                navigate("/map")
+              }}
+            >
+              Exit
+            </button>
+          </>
+        )}
       </Layout>
     )
   }
@@ -132,7 +171,7 @@ class Quest extends React.Component {
 
   goToNextPhase = () => {
     const { currentPhase, phases } = this.state
-    console.log(phases)
+
     if (currentPhase < phases.length) {
       this.setState({
         currentPhase: currentPhase + 1,
@@ -140,6 +179,27 @@ class Quest extends React.Component {
     } else {
       this.setState({
         isQuestComplete: true,
+      })
+    }
+  }
+
+  onSubmitAnswer = () => {
+    const { phases, currentPhase } = this.state
+    const phase = phases[currentPhase - 1]
+    const answer = this.answerInput.current.value
+    const simplifyText = text => {
+      return text
+        .toLowerCase() // lowercase
+        .replace(/\.+$/, "") // remove periods "."
+      // also remove words like "the" ?
+    }
+    if (simplifyText(answer) == simplifyText(phase.fields.answer)) {
+      alert("Correct!")
+      this.goToNextPhase()
+    } else {
+      this.setState({
+        isQuestComplete: true,
+        isQuestSuccessful: false,
       })
     }
   }

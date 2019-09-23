@@ -89,9 +89,10 @@ class Find extends React.Component {
           <BottomDrawerFull>
             {selectedQuest && (
               <>
+                <h3>{selectedQuest.fields.description}</h3>
                 <p>Estimated time: {selectedQuest.fields.timeToComplete}</p>
                 <p>Estimated travel: {selectedQuest.fields.distanceToTravel}</p>
-                <button className={styles.button} onClick={()=>{navigate('quest?'+selectedQuest.sys.id)}}>Start</button>
+                <button className={styles.button} onClick={()=>{navigate('quest?id='+selectedQuest.sys.id)}}>Start</button>
               </>
             )}
           </BottomDrawerFull>

@@ -133,7 +133,7 @@ class Guidance extends React.Component {
       false
     )
     // distance is within 2 meters from target
-    if (distance <= 2 && distance > 0) {
+    if (distance <= 2 && distance >= 0) {
       this.setState({ arrived: true })
     }
   }
