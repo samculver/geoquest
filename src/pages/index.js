@@ -31,7 +31,6 @@ const Home = () => {
           </button>
         </p>
       </p>
-      <p className={styles.stats}>v 0.0.16</p>
     </Layout>
   )
 }
