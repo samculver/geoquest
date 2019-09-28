@@ -11,6 +11,8 @@ const Home = () => {
 
   return (
     <Layout>
+      
+      <h1 className={styles.title}>Quest<span className={styles.titleEnd}>Hunter</span></h1>
       <GiTreasureMap className={styles.logo} />
       <p className={styles.centerTopAdjust}>
         <p>

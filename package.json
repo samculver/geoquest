@@ -18,6 +18,7 @@
     "contentful": "^7.10.0",
     "gatsby": "^2.8.2",
     "gatsby-plugin-portal": "^1.0.7",
+    "gatsby-plugin-prefetch-google-fonts": "^1.4.3",
     "gatsby-plugin-sass": "^2.0.11",
     "gatsby-source-contentful": "^2.1.35",
     "google-map-react": "^1.1.4",

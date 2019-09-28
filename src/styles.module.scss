@@ -26,6 +26,10 @@ a:visited {
   }
 }
 
+h1{
+  font-size:2em;
+}
+
 h2 {
   font-weight: 400;
   font-size: 1.6em;
@@ -60,7 +64,19 @@ h3 {
 
 .app {
   .logo {
-    font-size: 10em;
+    font-size: 9em;
+    margin-bottom:.2em;
+  }
+
+  .title{
+    font-family: 'Gochi Hand';
+    font-weight: normal;
+    font-size: 2.2em;
+    margin-bottom: -.1em;
+
+    .titleEnd{
+      font-family:'Permanent Marker';
+    }
   }
 
   .centerTopAdjust {
