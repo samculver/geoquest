@@ -101,7 +101,8 @@ class Quest extends React.Component {
               </BottomDrawerPeek>
               <BottomDrawerFull>
                 <p>{quest.fields.description}</p>
-                {currentPhase > 0 && <p>Current phase: {phase.fields.title}</p>}
+                <p>{`Phase ${currentPhase} of ${phases.length}`}</p>
+                {currentPhase > 0 && <p>Current objective: {phase.fields.title}</p>}
               </BottomDrawerFull>
             </BottomDrawer>
           </>
