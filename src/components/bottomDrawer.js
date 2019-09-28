@@ -1,5 +1,6 @@
 import React from "react"
 import styles from "../styles.module.scss"
+import { TiChevronLeft } from "react-icons/ti"
 
 const BottomDrawer = props => {
   const { display } = props
@@ -27,6 +28,7 @@ const BottomDrawerPeek = props => {
   return (
       <div onClick={props.onClick} className={styles.drawerPeek}>
         {props.children}
+        <TiChevronLeft className={`${styles.mapIcon} ${styles.drawerArrow}`} />
       </div>
   )
 }

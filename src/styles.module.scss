@@ -124,12 +124,12 @@ h3 {
       width: 40px;
       height: 40px;
 
-      &.clickable{
-        cursor:poiner;
+      &.clickable {
+        cursor: poiner;
       }
 
-      &.selected{
-        color:teal;
+      &.selected {
+        color: teal;
       }
     }
   }
@@ -169,7 +169,7 @@ h3 {
   background: #333;
   box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
   margin-top: 0px;
-  transition:margin 200ms ease-out;
+  transition: margin 200ms ease-out;
 
   &.showPeek {
     margin-top: -60px;
@@ -177,6 +177,13 @@ h3 {
 
   &.showFull {
     margin-top: -360px;
+
+    .drawerPeek {
+      .drawerArrow {
+        transform: rotate(-90deg);
+        top: 11px;
+      }
+    }
   }
 
   .drawerPeek {
@@ -185,35 +192,34 @@ h3 {
     align-items: center;
     font-size: 1.4em;
     box-sizing: border-box;
-    padding: 10px 20px;
-    position:relative;
+    padding: 10px 50px 10px 20px;
+    position: relative;
+
+    .drawerArrow {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 34px;
+      transform: rotate(90deg);
+      transition: transform 500ms;
+    }
 
     > * {
       flex: 1;
-    }
-
-    &:after{
-      content:"";
-      display:block;
-      position:absolute;
-      top:5px;
-      left:50%;
-      z-index:1;
-      width: 40px;
-      height:4px;
-      margin-left:-20px;
-      background-color:#222;
     }
   }
 
   .drawerFull {
     height: 300px;
-    font-size:1.2em;
     box-sizing: border-box;
     border-top: 2px solid #222;
     box-sizing: border-box;
     padding: 10px 20px;
-    overflow:auto;
+    overflow: auto;
+
+    p{
+      font-size: 1.2em;
+    }
   }
 }
 
