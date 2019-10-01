@@ -11,7 +11,8 @@ const Home = () => {
   typeof window !== "undefined" && window.localStorage.clear()
 
   const responseFacebook = (response) => {
-    navigate("/start/")
+    alert('login success!');
+    console.log(response);
   }
 
   return (
