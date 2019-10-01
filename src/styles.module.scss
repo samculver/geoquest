@@ -26,8 +26,8 @@ a:visited {
   }
 }
 
-h1{
-  font-size:2em;
+h1 {
+  font-size: 2em;
 }
 
 h2 {
@@ -65,22 +65,46 @@ h3 {
 .app {
   .logo {
     font-size: 7em;
-    margin-bottom:.4em;
+    margin-bottom: 0.4em;
   }
 
-  .title{
-    font-family: 'Gochi Hand';
+  .title {
+    font-family: "Gochi Hand";
     font-weight: normal;
     font-size: 2.2em;
-    margin-bottom: -.1em;
+    margin-bottom: -0.1em;
 
-    .titleEnd{
-      font-family:'Permanent Marker';
+    .titleEnd {
+      font-family: "Permanent Marker";
     }
   }
 
   .centerTopAdjust {
     margin-bottom: 5em;
+  }
+
+  .facebookButton {
+    background-color: #4c69ba;
+    color: white;
+    padding: 0.8em 1.1em 0.7em;
+    margin: 0 0.5em;
+    font-size: 1.1em;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-radius: 0.4em;
+    border: none;
+    border-bottom: 0.2em solid #2a4591;
+    font-family: inherit;
+    position: relative;
+    padding-left: 39px;
+
+    svg {
+      font-size: 1.7em;
+      position: absolute;
+      left: 11px;
+      top: 6px;
+    }
   }
 
   .commandBar {
@@ -233,7 +257,7 @@ h3 {
     padding: 10px 20px;
     overflow: auto;
 
-    p{
+    p {
       font-size: 1.2em;
     }
   }
