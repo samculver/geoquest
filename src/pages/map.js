@@ -6,6 +6,7 @@ import BottomDrawer, {
   BottomDrawerPeek,
   BottomDrawerFull,
 } from "../components/bottomDrawer"
+import UserMenu from "../components/UserMenu"
 import Div100vh from "react-div-100vh"
 import * as contentful from "contentful"
 import GoogleMapReact from "google-map-react"
@@ -52,6 +53,7 @@ class Find extends React.Component {
               onClick={() => navigate("/")}
             />
           </div>
+          <UserMenu />
         </div>
         <Div100vh className={styles.map}>
           <GoogleMapReact
