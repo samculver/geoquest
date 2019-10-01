@@ -6,7 +6,7 @@ import BottomDrawer, {
   BottomDrawerPeek,
   BottomDrawerFull,
 } from "../components/bottomDrawer"
-import UserMenu from "../components/UserMenu"
+import UserMenu from "../components/userMenu"
 import Div100vh from "react-div-100vh"
 import * as contentful from "contentful"
 import GoogleMapReact from "google-map-react"
