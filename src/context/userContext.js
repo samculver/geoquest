@@ -5,7 +5,9 @@ const defaultState = {
   name: null,
   facebookId: null,
   picture: null,
+  loggedIn: false,
   setUser: () => {},
+  logout: () => {},
 }
 
 // create our context
@@ -21,16 +23,32 @@ class UserProvider extends React.Component {
       name: null,
       facebookId: null,
       picture: null,
+      loggedIn: false
     }
   }
 
-  setUser({ name, id: facebookId, picture }) {
-    this.setState({ name, facebookId, picture })
+  componentDidMount() {
+    const cachedUserData = localStorage.getItem("user");
+    console.log(cachedUserData)
+    if(cachedUserData){
+      this.setUser(JSON.parse(cachedUserData));
+    }
+  }
+
+  setUser(data) {
+    const { name, id: facebookId, picture } = data
+    this.setState({ name, facebookId, picture, loggedIn: true })
+    localStorage.setItem("user", JSON.stringify(data))
+  }
+
+  logout() {
+    this.setState({ name: null, facebookId: null, picture: null, loggedIn: false })
+    localStorage.clear()
   }
 
   render() {
     const { children } = this.props
-    const { id, name, facebookId, picture } = this.state
+    const { id, name, facebookId, picture, loggedIn } = this.state
     return (
       <UserContext.Provider
         value={{
@@ -38,6 +56,9 @@ class UserProvider extends React.Component {
           name,
           facebookId,
           picture,
+          loggedIn,
+          setUser: (data) => this.setUser(data),
+          logout: () => this.logout(),
         }}
       >
         {children}

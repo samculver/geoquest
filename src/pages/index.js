@@ -9,9 +9,6 @@ import { GiTreasureMap } from "react-icons/gi"
 import { TiSocialFacebookCircular } from "react-icons/ti"
 
 const Home = () => {
-  // reset any game data
-  typeof window !== "undefined" && window.localStorage.clear()
-
   const userContext = useContext(UserContext)
 
   const responseFacebook = response => {
@@ -31,22 +28,61 @@ const Home = () => {
       </h1>
       <GiTreasureMap className={styles.logo} />
       <div className={styles.centerTopAdjust}>
-        <p>
-          <FacebookLogin
-            appId="686273005195758"
-            autoLoad={true}
-            fields="name,email,picture"
-            callback={responseFacebook}
-            cssClass={styles.facebookButton}
-            icon={<TiSocialFacebookCircular />}
-          />
-        </p>
-        <p>
-          <button className={styles.button} onClick={() => navigate("/start/")}>
-            Skip
-          </button>
-        </p>
+        {!userContext.loggedIn && (
+          <div>
+            <p>
+              <FacebookLogin
+                appId="686273005195758"
+                fields="name,email,picture"
+                callback={responseFacebook}
+                cssClass={styles.facebookButton}
+                icon={<TiSocialFacebookCircular />}
+              />
+            </p>
+            <p>
+              <button
+                className={styles.button}
+                onClick={() =>
+                  userContext.setUser({
+                    name: "anonymous",
+                    id: null,
+                    picture: null,
+                  })
+                }
+              >
+                Skip
+              </button>
+            </p>
+          </div>
+        )}
+        {userContext.loggedIn && (
+          <>
+            <p>
+              <button
+                className={styles.button}
+                onClick={() => navigate("/map")}
+              >
+                Play
+              </button>
+            </p>
+            <p>
+              <button className={styles.button} disabled>
+                Create
+              </button>
+            </p>
+            <p>
+              <button
+                className={styles.button}
+                onClick={() => navigate("/modes/")}
+              >
+                Test
+              </button>
+            </p>
+            <span className={styles.logout} onClick={userContext.logout}>Log out</span>
+          </>
+        )}
       </div>
+      
     </Layout>
   )
 }
