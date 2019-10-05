@@ -10,15 +10,17 @@ const Profile = () => {
   return (
     <Layout>
       <div className={styles.centerTopAdjust}>
-        <h2>My Profile</h2>
+        <h2>Your Name</h2>
+        <h3>Adventurer</h3>
         {userContext.picture && (
           <div
             className={styles.avatar}
             style={{ backgroundImage: `url(${userContext.picture.data.url})` }}
           />
         )}
-        <p>Title: Adventurer</p>
-        <p>Completed Quests: 0</p>
+        <h3>Recently completed quests:</h3>
+        <p>None</p>
+        <p>Looks like a good time to start exploring!</p>
       </div>
     </Layout>
   )
