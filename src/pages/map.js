@@ -28,7 +28,7 @@ class Find extends React.Component {
 
   componentDidMount() {
     // reset any game data. later could ask if would like to resume in-progess quest?
-    typeof window !== 'undefined' && window.localStorage.clear()
+    //typeof window !== 'undefined' && window.localStorage.clear()
     
     // get nearby quests from Contentful
     this.getQuestsData()
