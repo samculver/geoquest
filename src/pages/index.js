@@ -12,6 +12,7 @@ const Home = () => {
   const userContext = useContext(UserContext)
 
   const responseFacebook = response => {
+    alert(response)
     if (response.name) {
       userContext.setUser(response)
     }
