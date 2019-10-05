@@ -119,7 +119,6 @@ class Quest extends React.Component {
             <button
               className={styles.button}
               onClick={() => {
-                this.removeGameCache()
                 navigate("/map")
               }}
             >
@@ -202,10 +201,8 @@ class Quest extends React.Component {
       })
       this.cacheQuestProgress(newPhase, false, true)
     } else {
-      this.setState({
-        isQuestComplete: true,
-      })
-      this.cacheQuestProgress(currentPhase, true, true)
+      //this.cacheQuestProgress(currentPhase, true, true)
+      this.endQuest()
     }
   }
 
@@ -241,11 +238,16 @@ class Quest extends React.Component {
       this.goToNextPhase()
     } else {
       this.setState({
-        isQuestComplete: true,
         isQuestSuccessful: false,
-      })
-      this.cacheQuestProgress(currentPhase, true, false)
+      }, this.endQuest)
     }
+  }
+
+  endQuest = () => {
+    this.setState({
+      isQuestComplete: true,
+    })
+    this.removeGameCache()
   }
 
   togglePeekClick = () => {
