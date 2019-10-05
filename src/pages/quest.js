@@ -102,7 +102,9 @@ class Quest extends React.Component {
               <BottomDrawerFull>
                 <p>{quest.fields.description}</p>
                 <p>{`Phase ${currentPhase} of ${phases.length}`}</p>
-                {currentPhase > 0 && <p>Current objective: {phase.fields.title}</p>}
+                {currentPhase > 0 && (
+                  <p>Current objective: {phase.fields.title}</p>
+                )}
               </BottomDrawerFull>
             </BottomDrawer>
           </>
@@ -117,6 +119,7 @@ class Quest extends React.Component {
             <button
               className={styles.button}
               onClick={() => {
+                this.removeGameCache()
                 navigate("/map")
               }}
             >
@@ -170,7 +173,10 @@ class Quest extends React.Component {
             phases: entries.items,
             loading: false,
           })
-          localStorage.setItem("phases" + questId, JSON.stringify(entries.items))
+          localStorage.setItem(
+            "phases" + questId,
+            JSON.stringify(entries.items)
+          )
         })
     })
   }
@@ -190,7 +196,7 @@ class Quest extends React.Component {
   goToNextPhase = () => {
     const { currentPhase, phases, questId } = this.state
     if (currentPhase < phases.length) {
-      const newPhase = currentPhase + 1;
+      const newPhase = currentPhase + 1
       this.setState({
         currentPhase: newPhase,
       })
@@ -200,17 +206,24 @@ class Quest extends React.Component {
         isQuestComplete: true,
       })
       this.cacheQuestProgress(currentPhase, true, true)
-    }    
+    }
   }
 
   cacheQuestProgress = (currentPhase, completed, successful) => {
     const { questId } = this.state
     const progress = {
-      'currentPhase':currentPhase,
-      'completed': completed,
-      'successful' : successful
+      currentPhase: currentPhase,
+      completed: completed,
+      successful: successful,
     }
     localStorage.setItem("questProgress" + questId, JSON.stringify(progress))
+  }
+
+  removeGameCache = () => {
+    const { questId } = this.state
+    localStorage.removeItem("quest" + questId)
+    localStorage.removeItem("phases" + questId)
+    localStorage.removeItem("questProgress" + questId)
   }
 
   onSubmitAnswer = () => {
