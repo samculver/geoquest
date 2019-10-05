@@ -1,7 +1,7 @@
 {
-  "name": "geoquest",
+  "name": "questhunter",
   "private": true,
-  "description": "Fun with finding and completing quests on a map.",
+  "description": "A game where you create and complete quests.",
   "version": "0.1.0",
   "scripts": {
     "build": "gatsby build",
