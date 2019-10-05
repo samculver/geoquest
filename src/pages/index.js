@@ -30,6 +30,7 @@ const Home = () => {
               <FacebookLogin
                 appId="686273005195758"
                 fields="name,email,picture"
+                disableMobileRedirect={true}
                 callback={responseFacebook}
                 cssClass={styles.facebookButton}
                 icon={<TiSocialFacebookCircular />}
